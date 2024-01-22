@@ -8,7 +8,6 @@
 #ifndef sprites_hpp
 #define sprites_hpp
 
-#include <stdio.h>
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -17,16 +16,15 @@ template <typename T_shape, typename T_size>
 class Sprites{
 public:
     Sprites(sf::Vector2f position, T_size size, sf::Color color);
-    
     T_shape* returnShape();
-    
     sf::Vector2f getPosition( ) const;
     
 protected:
     sf::Vector2f position;
     T_size size;
     sf::Color color;
-    T_shape shape; 
+    T_shape shape;
+   // float deltaTime; 
 };
 
 //player class
@@ -50,5 +48,18 @@ private:
     float outline;
     sf::Color outlineColor;
 };
+
+//bullet class
+template <typename T_shape, typename T_size>
+class Bullet : public Sprites<T_shape, T_size>{
+public:
+    Bullet(sf::Vector2f playerPos, T_size size, sf::Color color, float speed);
+    void moveBullet(sf::Vector2f playerPos, sf::Vector2i mousPos);
+    
+private:
+    sf::Vector2f direction; 
+    float speed; 
+};
+
 
 #endif /* sprites_hpp */

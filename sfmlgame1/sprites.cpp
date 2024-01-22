@@ -5,7 +5,7 @@
 //  Created by Sunmyoung Yun on 2024/01/07.
 //
 #include "sprites.hpp"
-//#include <iostream>
+#include <iostream>
 
 //constructors
 template <typename T_shape, typename T_size>
@@ -17,7 +17,7 @@ Sprites<T_shape, T_size>::Sprites(sf::Vector2f position, T_size size, sf::Color 
 }
 
 template <typename T_shape, typename T_size>
-Player<T_shape,T_size>::Player(sf::Vector2f position, T_size size, sf::Color color) : Sprites<T_shape, T_size>(position, size, color){ };
+Player<T_shape,T_size>::Player(sf::Vector2f position, T_size size, sf::Color color) : Sprites<T_shape, T_size>(position, size, color){ }
 
 template <typename T_shape, typename T_size>
 Enemy<T_shape, T_size>::Enemy(sf::Vector2f position, T_size size, sf::Color color, float speedBuffer, float outline, sf::Color outlineColor) : Sprites<T_shape, T_size>(position, size, color), speedBuffer(speedBuffer), outline(outline), outlineColor(outlineColor){
@@ -28,7 +28,7 @@ Enemy<T_shape, T_size>::Enemy(sf::Vector2f position, T_size size, sf::Color colo
     this->shape.setFillColor(color);
     this->shape.setOutlineColor(outlineColor);
     this->shape.setOutlineThickness(outline);
-};
+}
 
 template <typename T_shape, typename T_size>
 Enemy<T_shape, T_size>::Enemy()
@@ -72,17 +72,23 @@ void Player<T_shape, T_size>::changePos(sf::Event & event, const int speedBuffer
 
 template <typename T_shape, typename T_size>
 void Enemy<T_shape, T_size>::moveEnemy(sf::Vector2f playerPos) {
-    
-    float enemyToPlayerX = playerPos.x - this -> position.x;
-    float enemyToPlayerY = playerPos.y - this -> position.y;
-    
-    float length = sqrt(enemyToPlayerX * enemyToPlayerX + enemyToPlayerY * enemyToPlayerY);
-   
-    enemyToPlayerX /= length;
-    enemyToPlayerY /= length;
-   
-    this->position.x += enemyToPlayerX * speedBuffer;
-    this->position.y += enemyToPlayerY * speedBuffer;
+    sf::Vector2f enemyToPlayer = playerPos - this ->position;
+    float length = sqrt(enemyToPlayer.x * enemyToPlayer.x + enemyToPlayer.y * enemyToPlayer.y);
+    enemyToPlayer /= length;
+    this->position += enemyToPlayer * speedBuffer;
 }
 
+template <typename T_shape, typename T_size>
+Bullet<T_shape, T_size>::Bullet(sf::Vector2f position, T_size size, sf::Color color, float speed) : Sprites<T_shape, T_size>(position, size, color), speed(speed){
+    this->shape.setRadius(size);
+    this->shape.setFillColor(color);
+    this->shape.setPosition(this->position);
+}
 
+template <typename T_shape, typename T_size>
+void Bullet<T_shape, T_size>::moveBullet(sf::Vector2f playerPos, sf::Vector2i mousePos){
+    direction = static_cast<sf::Vector2f>(mousePos) - this ->position;
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    direction /= length;
+    this->position += direction * speed;
+}
