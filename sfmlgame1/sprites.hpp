@@ -10,45 +10,53 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <iostream>
 
-extern float deltaTime; 
-//sprite parent class
+//bool globalMoveState = true;
+
+//sprite class
 template <typename T_shape, typename T_size>
 class Sprites{
 public:
-    Sprites(sf::Vector2f position, T_size size, sf::Color color);
+    Sprites(sf::Vector2f position, T_size size, sf::Color color, float speed);
     T_shape* returnShape();
     sf::Vector2f getPosition( ) const;
+    bool outOfScreen( );
+    void resetPos( );
     virtual ~Sprites() = default;
+    void setMoveState(bool moveState);
+    bool isTouching(sf::Vector2f targetSpritePos);
     
 protected:
     sf::Vector2f position;
     T_size size;
     sf::Color color;
     T_shape shape;
-   // float deltaTime; 
+    float speed;
+    bool moveState = true;
 };
 
 //player class
 template <typename T_shape, typename T_size>
 class Player : public Sprites<T_shape, T_size>{
 public:
-    void changePos(sf::Event & event, const int speedBuffer);
-    Player(sf::Vector2f position, T_size size, sf::Color color);
+    void changePos(sf::Event & event);
+    Player(sf::Vector2f position, T_size size, sf::Color color, float speed);
     ~Player( ) override{ };
+    /////
+    void setGlobalMoveState(bool enemyTouching);
 };
 
 //enemy class
 template <typename T_shape, typename T_size>
 class Enemy : public Sprites<T_shape, T_size>{
 public:
-    Enemy(sf::Vector2f position, T_size size, sf::Color color, float speedBuffer, float outline, sf::Color outlineColor);
+    Enemy(sf::Vector2f position, T_size size, sf::Color color, float speed, float outline, sf::Color outlineColor);
     Enemy( ); 
     void moveEnemy(sf::Vector2f playerPos);
     ~Enemy( ) override{ };
     
 private:
-    float speedBuffer;
     float outline;
     sf::Color outlineColor;
 };
@@ -62,8 +70,7 @@ public:
     ~Bullet( ) override{ }; 
     
 private:
-    void calculateDirVec( ); 
-    float speed;
+    void calculateDirVec( );
     const sf::Vector2i mousePos;
     sf::Vector2f direction;
     sf::Vector2f directionNorm; 
