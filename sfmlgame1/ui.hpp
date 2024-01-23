@@ -13,7 +13,7 @@
 
 class Text{
 public:
-    //Text(const &fstream fontFile, std::string message, sf::Color color, unsigned char pixelSize);
+//    Text(const &fstream fontFile, std::string message, sf::Color color, unsigned char pixelSize);
 
 private:
     sf::Font font;
@@ -32,6 +32,8 @@ public:
     screen( );
 private:
     Text text;
+    sf::Window window;
+ 
 };
 
 

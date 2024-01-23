@@ -7,6 +7,8 @@
 #include "sprites.hpp"
 #include <iostream>
 
+extern float deltaTime;
+
 //constructors
 template <typename T_shape, typename T_size>
 Sprites<T_shape, T_size>::Sprites(sf::Vector2f position, T_size size, sf::Color color) : position(position), size(size), color(color){
@@ -79,16 +81,20 @@ void Enemy<T_shape, T_size>::moveEnemy(sf::Vector2f playerPos) {
 }
 
 template <typename T_shape, typename T_size>
-Bullet<T_shape, T_size>::Bullet(sf::Vector2f position, T_size size, sf::Color color, float speed) : Sprites<T_shape, T_size>(position, size, color), speed(speed){
+Bullet<T_shape, T_size>::Bullet(sf::Vector2f position, T_size size, sf::Color color, float speed, sf::Vector2i mousePos) : Sprites<T_shape, T_size>(position, size, color), speed(speed), mousePos(mousePos){
     this->shape.setRadius(size);
     this->shape.setFillColor(color);
     this->shape.setPosition(this->position);
+    calculateDirVec( );
 }
 
 template <typename T_shape, typename T_size>
-void Bullet<T_shape, T_size>::moveBullet(sf::Vector2f playerPos, sf::Vector2i mousePos){
+void Bullet<T_shape, T_size>::calculateDirVec(){
     direction = static_cast<sf::Vector2f>(mousePos) - this ->position;
-    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-    direction /= length;
-    this->position += direction * speed;
+    directionNorm = direction / std::sqrt(direction.x * direction.x + direction.y * direction.y);
+}
+
+template <typename T_shape, typename T_size>
+void Bullet<T_shape, T_size>::moveBullet(){
+    this->position += directionNorm * speed;
 }

@@ -12,14 +12,16 @@
 #include "ui.cpp"
 #include "ui.hpp"
 
+float deltaTime = 0.0f;
+
 int main( ){
     
     const int screenWidth = 800, screenHeight = 450;
     sf::RenderWindow window(sf::VideoMode(screenWidth,screenHeight), "sfml game tut" );
+    window.setFramerateLimit(30);
     
     sf::Clock clock;
-    float deltaTime;
-    
+
     //set sprites
     Player<sf::RectangleShape, sf::Vector2f> playerSprite(sf::Vector2f{50.0f, 50.0f}, sf::Vector2f{20.0f, 10.0f}, sf::Color::Red);
     std::vector<Bullet<sf::CircleShape, float>> bulletsVec;
@@ -28,7 +30,6 @@ int main( ){
     for(int i = 0; i < enemyNum; ++i){
         enemySprite[i] = Enemy<sf::CircleShape, float>(sf::Vector2f{800,450}, 10.0f, sf::Color::Blue, 1.0f, 5.0f, sf::Color(250, 150, 100));
     }
-    std::vector<sf::Vector2i> mousePosition;
     
     while(window.isOpen( )){
         sf::Event event;
@@ -40,22 +41,25 @@ int main( ){
             if (event.type == sf::Event::KeyPressed)
                 playerSprite.changePos(event, 8);
             if (event.type == sf::Event::MouseButtonPressed){
-                Bullet<sf::CircleShape, float> bullet(playerSprite.getPosition( ), 5.0f, sf::Color::White, 10.0f);
+                Bullet<sf::CircleShape, float> bullet(playerSprite.getPosition( ), 5.0f, sf::Color::White, 10.0f, sf::Mouse::getPosition(window));
                 bulletsVec.push_back(bullet);
-                mousePosition.push_back(sf::Mouse::getPosition(window));
             }
             for(int i = 0; i< enemyNum; ++i){
                 enemySprite[i].moveEnemy(playerSprite.getPosition());
             }
-            for (int i = 0; i< mousePosition.size( ); ++i){
-                bulletsVec[i].moveBullet(playerSprite.getPosition( ), mousePosition[i]);
+            
+            for(auto &bullets: bulletsVec){
+                bullets.moveBullet();
+//                if (bullets.getPosition().x < 0 || bullets.getPosition().x > screenWidth || bullets.getPosition().y < 0 || bullets.getPosition().y > screenHeight){
+//                    bulletsVec.erase(bullets);
+//                }
             }
             
             window.clear( );
             
             //draw sprites here
-            for (auto& bullet : bulletsVec) {
-                window.draw(*bullet.returnShape());
+            for (auto& bulletsIt : bulletsVec) {
+                window.draw(*bulletsIt.returnShape());
             }
             window.draw(*playerSprite.returnShape());
             
@@ -66,6 +70,8 @@ int main( ){
             window.display( );
         }
     }
+    
+    return 0;
 }
 
 
