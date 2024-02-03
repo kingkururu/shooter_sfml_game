@@ -17,10 +17,9 @@
 		3F5B62542B46882600FCF131 /* libsfml-network.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62532B46882600FCF131 /* libsfml-network.2.6.1.dylib */; };
 		3F5B62562B46883400FCF131 /* libsfml-window.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62552B46883400FCF131 /* libsfml-window.2.6.1.dylib */; };
 		3F5B62582B46884400FCF131 /* libsfml-system.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62572B46884400FCF131 /* libsfml-system.2.6.1.dylib */; };
+		3F7FECCC2B67825F002D1CA1 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F7FECCA2B67825F002D1CA1 /* game.cpp */; };
 		3F8A55142B4A8F7600E49C29 /* sprites.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A55122B4A8F7600E49C29 /* sprites.cpp */; };
-		3FADDEC92B5FE77D0042055B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FADDEC72B5FE77D0042055B /* game.cpp */; };
 		3FC848CA2B46C908001439B1 /* libsfml-audio.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B624F2B46880D00FCF131 /* libsfml-audio.2.6.1.dylib */; };
-		3FDE2F352B5A0CFC0081F69F /* ui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE2F332B5A0CFC0081F69F /* ui.cpp */; };
 		3FF1DE602B46F74000DF4EB7 /* SFML in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3FF1DE5F2B46F74000DF4EB7 /* SFML */; };
 /* End PBXBuildFile section */
 
@@ -66,12 +65,10 @@
 		3F5B62532B46882600FCF131 /* libsfml-network.2.6.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-network.2.6.1.dylib"; path = "SFML/lib/libsfml-network.2.6.1.dylib"; sourceTree = "<group>"; };
 		3F5B62552B46883400FCF131 /* libsfml-window.2.6.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.6.1.dylib"; path = "SFML/lib/libsfml-window.2.6.1.dylib"; sourceTree = "<group>"; };
 		3F5B62572B46884400FCF131 /* libsfml-system.2.6.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.6.1.dylib"; path = "SFML/lib/libsfml-system.2.6.1.dylib"; sourceTree = "<group>"; };
+		3F7FECCA2B67825F002D1CA1 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		3F7FECCB2B67825F002D1CA1 /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
 		3F8A55122B4A8F7600E49C29 /* sprites.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprites.cpp; sourceTree = "<group>"; };
 		3F8A55132B4A8F7600E49C29 /* sprites.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprites.hpp; sourceTree = "<group>"; };
-		3FADDEC72B5FE77D0042055B /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
-		3FADDEC82B5FE77D0042055B /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
-		3FDE2F332B5A0CFC0081F69F /* ui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ui.cpp; sourceTree = "<group>"; };
-		3FDE2F342B5A0CFC0081F69F /* ui.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ui.hpp; sourceTree = "<group>"; };
 		3FF1DE5F2B46F74000DF4EB7 /* SFML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SFML; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,12 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				3F5B62362B4685F800FCF131 /* main.cpp */,
-				3FDE2F332B5A0CFC0081F69F /* ui.cpp */,
-				3FDE2F342B5A0CFC0081F69F /* ui.hpp */,
+				3F7FECCA2B67825F002D1CA1 /* game.cpp */,
+				3F7FECCB2B67825F002D1CA1 /* game.hpp */,
 				3F8A55122B4A8F7600E49C29 /* sprites.cpp */,
 				3F8A55132B4A8F7600E49C29 /* sprites.hpp */,
-				3FADDEC72B5FE77D0042055B /* game.cpp */,
-				3FADDEC82B5FE77D0042055B /* game.hpp */,
 			);
 			path = sfmlgame1;
 			sourceTree = "<group>";
@@ -200,9 +195,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F8A55142B4A8F7600E49C29 /* sprites.cpp in Sources */,
-				3FDE2F352B5A0CFC0081F69F /* ui.cpp in Sources */,
 				3F5B62372B4685F800FCF131 /* main.cpp in Sources */,
-				3FADDEC92B5FE77D0042055B /* game.cpp in Sources */,
+				3F7FECCC2B67825F002D1CA1 /* game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

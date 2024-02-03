@@ -23,7 +23,20 @@ bool Sprites<T_shape, T_size>::outOfScreen(){
 template <typename T_shape, typename T_size>
 void Sprites<T_shape, T_size>::setMoveState(bool moveState){
     this-> moveState = moveState;
+//    if(moveState)
+//    std::cout << "bullet not touch";
+//    else {
+//        std::cout << "bullet touched";
+//    }
 }
+
+template <typename T_shape, typename T_size>
+bool Sprites<T_shape, T_size>::getGlobalMoveState() const {
+    return globalMoveState; 
+}
+
+template <typename T_shape, typename T_size>
+bool Sprites<T_shape, T_size>::getMoveState() const { return this-> moveState;}
 
 template <typename T_shape, typename T_size>
 void Sprites<T_shape, T_size>::resetPos(){
@@ -48,8 +61,8 @@ Sprites<T_shape, T_size>::Sprites(sf::Vector2f position, T_size size, sf::Color 
 
 template <typename T_shape, typename T_size>
 T_shape* Sprites<T_shape, T_size>::returnShape() {
-    shape.setPosition(position);
-    return &shape;
+        shape.setPosition(position);
+        return &shape;
 }
 
 template <typename T_shape, typename T_size>
@@ -59,8 +72,20 @@ sf::Vector2f Sprites<T_shape, T_size>::getPosition( ) const {
 
 template <typename T_shape, typename T_size>
 bool Sprites<T_shape, T_size>::isTouching(sf::Vector2f targetSpritePos) {
-    const float epsilon = 0.1f; // Adjust this value based on your specific needs
+    const float epsilon = 0.5f; // Adjust this value based on your specific needs
     return (std::abs(targetSpritePos.x - this->position.x) < epsilon) || (std::abs(targetSpritePos.y - this->position.y) < epsilon);
+  
+//    //fix here !!
+//
+//    if (typeid(size) == typeid(float)){
+//
+//    } else if (typeid(size) == typeid(sf::Vector2f)){
+//
+//    }
+//
+//    // fix here!!
+    
+    
 }
 
 //player class functions
@@ -121,7 +146,7 @@ Enemy<T_shape, T_size>::Enemy()
 
 template <typename T_shape, typename T_size>
 void Enemy<T_shape, T_size>::moveEnemy(sf::Vector2f playerPos) {
-    if(globalMoveState){
+    if(globalMoveState&&this->moveState){
         sf::Vector2f enemyToPlayer = playerPos - this ->position;
         float length = sqrt(enemyToPlayer.x * enemyToPlayer.x + enemyToPlayer.y * enemyToPlayer.y);
         enemyToPlayer /= length;
@@ -149,3 +174,4 @@ void Bullet<T_shape, T_size>::moveBullet(){
     if(globalMoveState)
     this->position += directionNorm * this->speed * deltaTime;
 }
+

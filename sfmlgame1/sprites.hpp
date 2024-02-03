@@ -26,6 +26,8 @@ public:
     virtual ~Sprites() = default;
     void setMoveState(bool moveState);
     bool isTouching(sf::Vector2f targetSpritePos);
+    bool getMoveState( ) const;
+    bool getGlobalMoveState( ) const; 
     
 protected:
     sf::Vector2f position;
@@ -67,7 +69,7 @@ class Bullet : public Sprites<T_shape, T_size>{
 public:
     Bullet(sf::Vector2f playerPos, T_size size, sf::Color color, float speed, sf::Vector2i mousePos);
     void moveBullet();
-    ~Bullet( ) override{ }; 
+    ~Bullet( ) override{ };
     
 private:
     void calculateDirVec( );
