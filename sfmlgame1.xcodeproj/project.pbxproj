@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F2DF4452B6DEBAC00B7D1DD /* libsfml-graphics.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62512B46881900FCF131 /* libsfml-graphics.2.6.1.dylib */; };
+		3F2DF4462B6DEBCE00B7D1DD /* libsfml-network.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62532B46882600FCF131 /* libsfml-network.2.6.1.dylib */; };
+		3F2DF4472B6DEBE000B7D1DD /* libsfml-window.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62552B46883400FCF131 /* libsfml-window.2.6.1.dylib */; };
+		3F2DF4482B6DEBEF00B7D1DD /* libsfml-system.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62572B46884400FCF131 /* libsfml-system.2.6.1.dylib */; };
+		3F2DF44A2B6DEDCB00B7D1DD /* libsfml-system.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B62572B46884400FCF131 /* libsfml-system.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3F2DF44B2B6DEDCB00B7D1DD /* libsfml-window.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B62552B46883400FCF131 /* libsfml-window.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3F2DF44C2B6DEDCB00B7D1DD /* libsfml-network.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B62532B46882600FCF131 /* libsfml-network.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3F2DF44D2B6DEDCB00B7D1DD /* libsfml-graphics.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B62512B46881900FCF131 /* libsfml-graphics.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3F2DF44E2B6DEDCB00B7D1DD /* libsfml-audio.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B624F2B46880D00FCF131 /* libsfml-audio.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3F5B62372B4685F800FCF131 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F5B62362B4685F800FCF131 /* main.cpp */; };
-		3F5B62412B46863700FCF131 /* libsfml-audio.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B623F2B46863700FCF131 /* libsfml-audio.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		3F5B62452B46864500FCF131 /* libsfml-graphics.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B62432B46864500FCF131 /* libsfml-graphics.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		3F5B62482B46865200FCF131 /* libsfml-network.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B62462B46865200FCF131 /* libsfml-network.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		3F5B624B2B46866500FCF131 /* libsfml-window.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B62492B46866500FCF131 /* libsfml-window.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		3F5B624E2B46867300FCF131 /* libsfml-system.2.6.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3F5B624C2B46867300FCF131 /* libsfml-system.2.6.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		3F5B62522B46881900FCF131 /* libsfml-graphics.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62512B46881900FCF131 /* libsfml-graphics.2.6.1.dylib */; };
-		3F5B62542B46882600FCF131 /* libsfml-network.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62532B46882600FCF131 /* libsfml-network.2.6.1.dylib */; };
-		3F5B62562B46883400FCF131 /* libsfml-window.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62552B46883400FCF131 /* libsfml-window.2.6.1.dylib */; };
-		3F5B62582B46884400FCF131 /* libsfml-system.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B62572B46884400FCF131 /* libsfml-system.2.6.1.dylib */; };
 		3F7FECCC2B67825F002D1CA1 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F7FECCA2B67825F002D1CA1 /* game.cpp */; };
 		3F8A55142B4A8F7600E49C29 /* sprites.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A55122B4A8F7600E49C29 /* sprites.cpp */; };
 		3FC848CA2B46C908001439B1 /* libsfml-audio.2.6.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5B624F2B46880D00FCF131 /* libsfml-audio.2.6.1.dylib */; };
+		3FD90C592B6E1173008237F8 /* fonts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD90C572B6E1173008237F8 /* fonts.cpp */; };
+		3FD90C5C2B6E1188008237F8 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD90C5A2B6E1188008237F8 /* sound.cpp */; };
 		3FF1DE602B46F74000DF4EB7 /* SFML in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3FF1DE5F2B46F74000DF4EB7 /* SFML */; };
 /* End PBXBuildFile section */
 
@@ -40,11 +42,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3F5B62452B46864500FCF131 /* libsfml-graphics.2.6.1.dylib in Embed Libraries */,
-				3F5B624B2B46866500FCF131 /* libsfml-window.2.6.1.dylib in Embed Libraries */,
-				3F5B62482B46865200FCF131 /* libsfml-network.2.6.1.dylib in Embed Libraries */,
-				3F5B62412B46863700FCF131 /* libsfml-audio.2.6.1.dylib in Embed Libraries */,
-				3F5B624E2B46867300FCF131 /* libsfml-system.2.6.1.dylib in Embed Libraries */,
+				3F2DF44A2B6DEDCB00B7D1DD /* libsfml-system.2.6.1.dylib in Embed Libraries */,
+				3F2DF44B2B6DEDCB00B7D1DD /* libsfml-window.2.6.1.dylib in Embed Libraries */,
+				3F2DF44C2B6DEDCB00B7D1DD /* libsfml-network.2.6.1.dylib in Embed Libraries */,
+				3F2DF44D2B6DEDCB00B7D1DD /* libsfml-graphics.2.6.1.dylib in Embed Libraries */,
+				3F2DF44E2B6DEDCB00B7D1DD /* libsfml-audio.2.6.1.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +71,11 @@
 		3F7FECCB2B67825F002D1CA1 /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
 		3F8A55122B4A8F7600E49C29 /* sprites.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprites.cpp; sourceTree = "<group>"; };
 		3F8A55132B4A8F7600E49C29 /* sprites.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprites.hpp; sourceTree = "<group>"; };
+		3FD90C572B6E1173008237F8 /* fonts.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fonts.cpp; sourceTree = "<group>"; };
+		3FD90C582B6E1173008237F8 /* fonts.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fonts.hpp; sourceTree = "<group>"; };
+		3FD90C5A2B6E1188008237F8 /* sound.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
+		3FD90C5B2B6E1188008237F8 /* sound.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sound.hpp; sourceTree = "<group>"; };
+		3FD90C5D2B6E1D5A008237F8 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		3FF1DE5F2B46F74000DF4EB7 /* SFML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SFML; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,11 +84,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2DF4482B6DEBEF00B7D1DD /* libsfml-system.2.6.1.dylib in Frameworks */,
+				3F2DF4472B6DEBE000B7D1DD /* libsfml-window.2.6.1.dylib in Frameworks */,
+				3F2DF4462B6DEBCE00B7D1DD /* libsfml-network.2.6.1.dylib in Frameworks */,
+				3F2DF4452B6DEBAC00B7D1DD /* libsfml-graphics.2.6.1.dylib in Frameworks */,
 				3FC848CA2B46C908001439B1 /* libsfml-audio.2.6.1.dylib in Frameworks */,
-				3F5B62582B46884400FCF131 /* libsfml-system.2.6.1.dylib in Frameworks */,
-				3F5B62562B46883400FCF131 /* libsfml-window.2.6.1.dylib in Frameworks */,
-				3F5B62542B46882600FCF131 /* libsfml-network.2.6.1.dylib in Frameworks */,
-				3F5B62522B46881900FCF131 /* libsfml-graphics.2.6.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,10 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				3F5B62362B4685F800FCF131 /* main.cpp */,
-				3F7FECCA2B67825F002D1CA1 /* game.cpp */,
-				3F7FECCB2B67825F002D1CA1 /* game.hpp */,
-				3F8A55122B4A8F7600E49C29 /* sprites.cpp */,
-				3F8A55132B4A8F7600E49C29 /* sprites.hpp */,
+				3FD90C542B6E1127008237F8 /* assets */,
+				3FD90C532B6E1119008237F8 /* game */,
 			);
 			path = sfmlgame1;
 			sourceTree = "<group>";
@@ -134,6 +139,53 @@
 				3F5B623E2B46862600FCF131 /* SFML */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3FD90C522B6E1109008237F8 /* sprites */ = {
+			isa = PBXGroup;
+			children = (
+				3F8A55132B4A8F7600E49C29 /* sprites.hpp */,
+				3F8A55122B4A8F7600E49C29 /* sprites.cpp */,
+			);
+			path = sprites;
+			sourceTree = "<group>";
+		};
+		3FD90C532B6E1119008237F8 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				3F7FECCB2B67825F002D1CA1 /* game.hpp */,
+				3F7FECCA2B67825F002D1CA1 /* game.cpp */,
+			);
+			path = game;
+			sourceTree = "<group>";
+		};
+		3FD90C542B6E1127008237F8 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				3FD90C562B6E113D008237F8 /* sound */,
+				3FD90C552B6E1132008237F8 /* fonts */,
+				3FD90C522B6E1109008237F8 /* sprites */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		3FD90C552B6E1132008237F8 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3FD90C5D2B6E1D5A008237F8 /* arial.ttf */,
+				3FD90C572B6E1173008237F8 /* fonts.cpp */,
+				3FD90C582B6E1173008237F8 /* fonts.hpp */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		3FD90C562B6E113D008237F8 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				3FD90C5A2B6E1188008237F8 /* sound.cpp */,
+				3FD90C5B2B6E1188008237F8 /* sound.hpp */,
+			);
+			path = sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +246,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD90C592B6E1173008237F8 /* fonts.cpp in Sources */,
 				3F8A55142B4A8F7600E49C29 /* sprites.cpp in Sources */,
+				3FD90C5C2B6E1188008237F8 /* sound.cpp in Sources */,
 				3F5B62372B4685F800FCF131 /* main.cpp in Sources */,
 				3F7FECCC2B67825F002D1CA1 /* game.cpp in Sources */,
 			);
