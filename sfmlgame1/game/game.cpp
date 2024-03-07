@@ -11,6 +11,35 @@ GameManager::GameManager() : screenWidth(800), screenHeight(450), deltaTime(0.0f
     window.setFramerateLimit(30);
 }
 
+GameManager::~GameManager() {
+    for (Sprite* enemy : enemySprite) {
+        delete enemy;
+        enemy = nullptr;
+    }
+    for (Sprite* bullet : bullets) {
+        delete bullet;
+        bullet = nullptr;
+    }
+    for (TextClass* textMessage : textMessages) {
+        delete textMessage;
+        textMessage = nullptr;
+    }
+    textMessages.clear();
+    
+    delete playerSprite;
+    playerSprite = nullptr;
+}
+
+void GameManager::runGame() {
+    createAssets();
+    while (window.isOpen()) {
+        countTime();
+        handleEvents();
+        update();
+        draw();
+    }
+}
+
 void GameManager::createAssets( ){
     //create assets here
     TextClass* textMessage = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", "hello world");
@@ -49,7 +78,13 @@ void GameManager::handleEvents(){
         }
     }
 }
-        
+
+void GameManager::countTime(){
+    sf::Time frameTime = clock.restart();
+    deltaTime = frameTime.asSeconds();
+    globalTime += frameTime.asSeconds(); 
+}
+
 void GameManager::update() {
     for (Sprite* enemy : enemySprite) {
         enemy->updatePos( );
@@ -71,40 +106,4 @@ void GameManager::draw() {
     }
     window.display();
 }
-
-void GameManager::countTime(){
-    sf::Time frameTime = clock.restart();
-    deltaTime = frameTime.asSeconds();
-    globalTime += frameTime.asSeconds(); 
-}
-
-void GameManager::runGame() {
-    createAssets(); 
-    while (window.isOpen()) {
-        countTime();
-        handleEvents();
-        update();
-        draw();
-    }
-}
-
-GameManager::~GameManager() {
-    for (Sprite* enemy : enemySprite) {
-        delete enemy;
-        enemy = nullptr;
-    }
-    for (Sprite* bullet : bullets) {
-        delete bullet;
-        bullet = nullptr;
-    }
-    for (TextClass* textMessage : textMessages) {
-        delete textMessage;
-        textMessage = nullptr;
-    }
-    textMessages.clear();
-    
-    delete playerSprite;
-    playerSprite = nullptr;
-}
-
 

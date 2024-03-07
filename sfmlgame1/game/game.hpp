@@ -16,8 +16,8 @@
 class GameManager {
 public:
     GameManager();
-    void runGame();
     ~GameManager();
+    void runGame();
 
 private:
     void createAssets();

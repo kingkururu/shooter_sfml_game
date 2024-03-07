@@ -17,10 +17,10 @@
 class Sprite{
 public:
     Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath);
+    ~Sprite();
     sf::Vector2f const getSpritePos();
     sf::Sprite const returnSpritesShape();
-    ~Sprite();
-    void updatePos(); 
+    void updatePos();
     
 protected:
     sf::Vector2f position;
