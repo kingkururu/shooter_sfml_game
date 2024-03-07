@@ -51,13 +51,24 @@ void GameManager::handleEvents(){
 }
         
 void GameManager::update() {
-    // Update game logic
+    for (Sprite* enemy : enemySprite) {
+        enemy->updatePos( );
+    }
+    for (Sprite* bullet : bullets) {
+        bullet->updatePos( );
+    }
+    playerSprite->updatePos();
 }
 
 void GameManager::draw() {
     window.draw(*textMessages[0]->getText());
-    window.draw(playerSprite->returnSpritesf()); 
-    
+    window.draw(playerSprite->returnSpritesShape());
+    for (Sprite* enemy : enemySprite) {
+        window.draw(enemy->returnSpritesShape());
+    }
+    for (Sprite* bullet : bullets) {
+        window.draw(bullet->returnSpritesShape());
+    }
     window.display();
 }
 
@@ -78,11 +89,11 @@ void GameManager::runGame() {
 }
 
 GameManager::~GameManager() {
-    for (sf::Sprite* enemy : enemySprite) {
+    for (Sprite* enemy : enemySprite) {
         delete enemy;
         enemy = nullptr;
     }
-    for (sf::Sprite* bullet : bullets) {
+    for (Sprite* bullet : bullets) {
         delete bullet;
         bullet = nullptr;
     }

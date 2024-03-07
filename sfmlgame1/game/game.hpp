@@ -34,8 +34,8 @@ private:
     sf::Clock clock;
     
     Sprite* playerSprite;
-    std::vector<sf::Sprite*> enemySprite;
-    std::vector<sf::Sprite*> bullets;
+    std::vector<Sprite*> enemySprite;
+    std::vector<Sprite*> bullets;
     std::vector<TextClass*> textMessages;
     
     struct flagEvents{

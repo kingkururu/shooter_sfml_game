@@ -25,8 +25,11 @@ sf::Vector2f const Sprite::getSpritePos(){
     return position; 
 }
 
-sf::Sprite const Sprite::returnSpritesf(){
+sf::Sprite const Sprite::returnSpritesShape(){
     return *spriteCreated;
 }
 
-void
+void Sprite::updatePos(){
+    
+}
+

@@ -18,7 +18,7 @@ class Sprite{
 public:
     Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath);
     sf::Vector2f const getSpritePos();
-    sf::Sprite const returnSpritesf(); 
+    sf::Sprite const returnSpritesShape();
     ~Sprite();
     void updatePos(); 
     
@@ -28,6 +28,19 @@ protected:
     sf::Texture* skin = nullptr;
     sf::Sprite* spriteCreated;
 };
+
+class Player : public Sprite{
+    
+};
+
+class Enemy : public Sprite{
+    
+};
+
+class Bullet : public Sprite{
+    
+};
+
 
 
 
