@@ -14,11 +14,6 @@
 #include "fonts.hpp"
 
 class GameManager {
-public:
-    GameManager();
-    ~GameManager();
-    void runGame();
-
 private:
     void createAssets();
     void handleEvents();
@@ -33,6 +28,8 @@ private:
     float globalTime;
     sf::Clock clock;
     
+    sf::Vector2i mouseClickedPos;
+    
     Sprite* playerSprite;
     std::vector<Sprite*> enemySprite;
     std::vector<Sprite*> bullets;
@@ -43,11 +40,25 @@ private:
         bool aPressed;
         bool sPressed;
         bool dPressed;
-        bool mouseClicked;
         
-        flagEvents() : wPressed(false), aPressed(false), sPressed(false), dPressed(false), mouseClicked(false) {}
+        flagEvents() : wPressed(false), aPressed(false), sPressed(false), dPressed(false){}
         
     } FlagEvents;
+    
+    struct gameEvents{
+        bool playerDead;
+        bool enemyDead;
+        
+        gameEvents() : playerDead(false), enemyDead(false){}
+        } GameEvents;
+    
+public:
+    GameManager();
+    ~GameManager();
+    void runGame();
+    flagEvents getFlagEvent(){ return FlagEvents; }
+    gameEvents getGameEvent(){ return GameEvents; }
+    sf::Vector2i getScreenSize(){ return sf::Vector2i{screenWidth, screenHeight}; }
 };
 
 #endif /* game_hpp */

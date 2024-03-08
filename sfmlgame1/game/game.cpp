@@ -45,6 +45,7 @@ void GameManager::createAssets( ){
     TextClass* textMessage = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", "hello world");
     
     playerSprite = new Sprite(sf::Vector2f{0.0f, 0.0f}, sf::Vector2i{0,0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/texture1.png");
+    playerSprite->setScreenSize(getScreenSize());
     
     textMessages.push_back(textMessage);
 }
@@ -74,7 +75,7 @@ void GameManager::handleEvents(){
             }
         }
         if (event.type == sf::Event::MouseButtonPressed){
-            FlagEvents.mouseClicked = true;
+            mouseClickedPos = sf::Mouse::getPosition(window);
         }
     }
 }
@@ -87,23 +88,31 @@ void GameManager::countTime(){
 
 void GameManager::update() {
     for (Sprite* enemy : enemySprite) {
-        enemy->updatePos( );
+        if(enemy->getMoveState())
+            enemy->updatePos( );
     }
     for (Sprite* bullet : bullets) {
-        bullet->updatePos( );
+        if(bullet->getMoveState())
+            bullet->updatePos( );
     }
-    playerSprite->updatePos();
+    if(playerSprite->getMoveState())
+        playerSprite->updatePos();
 }
 
 void GameManager::draw() {
-    window.draw(*textMessages[0]->getText());
+    
     window.draw(playerSprite->returnSpritesShape());
+    for (TextClass* text : textMessages) {
+        if(text->visibleState())
+        window.draw(*text->getText());
+    }
     for (Sprite* enemy : enemySprite) {
+        if(enemy->getVisibleState())
         window.draw(enemy->returnSpritesShape());
     }
     for (Sprite* bullet : bullets) {
+        if(bullet->getVisibleState())
         window.draw(bullet->returnSpritesShape());
     }
     window.display();
 }
-

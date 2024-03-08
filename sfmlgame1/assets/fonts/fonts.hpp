@@ -18,6 +18,7 @@ public:
     TextClass(sf::Vector2f position, unsigned int size, sf::Color color, const std::string& fontPath, const std::string& testMessage);
     sf::Text* getText();
     ~TextClass();
+    const bool visibleState(){ return visible; }
 
 private:
     sf::Vector2f position;
@@ -25,6 +26,7 @@ private:
     sf::Color color;
     sf::Font* font = nullptr; 
     sf::Text* text = nullptr;
+    bool visible = true;
 };
 
 
