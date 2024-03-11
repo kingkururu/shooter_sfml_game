@@ -12,7 +12,7 @@
 #include <string>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include "global.hpp"
 
 class Sprite{
 public:
@@ -71,4 +71,4 @@ private:
 
 
 
-#endif /* fonts_hpp */
+#endif /* sprites_hpp */

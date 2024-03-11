@@ -5,6 +5,7 @@
 //  Created by Sunmyoung Yun on 2024/01/07.
 //
 #include "sprites.hpp"
+flagEvents FlagEvents;
 
 //base class (sprite)
 Sprite::Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : position(position), size(size), skin(new sf::Texture), spriteCreated(new sf::Sprite){
@@ -44,9 +45,9 @@ void Sprite::updatePos(){
 //Player class
 void Player::movePlayer(){
     
-//    if(getFlagEvent().wPressed){
-//
-//    } else if (
+    if(FlagEvents.wPressed){
+//  
+   }
 //
     spriteCreated->setPosition(position);
     updatePos();
