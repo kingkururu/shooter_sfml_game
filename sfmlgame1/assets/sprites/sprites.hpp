@@ -32,7 +32,7 @@ protected:
     bool moveState = true;
     bool visibleState = true;
     
-    float speed = 20;
+    float speed = 40;
 };
 
 //player class

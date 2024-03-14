@@ -43,7 +43,14 @@ void GameManager::createAssets( ){
     //create assets here
     TextClass* textMessage = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", "hello world");
     
-    playerSprite = new Player(sf::Vector2f{0.0f, 0.0f}, sf::Vector2i{0,0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/texture1.png");
+   // for (int i = 0; i< GameComponents.enemyNum; i++){
+        Enemy* enemy1 = new Enemy(sf::Vector2f{0.0f, 0.0f}, sf::Vector2i{0,0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/3.png");
+        enemySprite.push_back(enemy1);
+  //  }
+    Bullet* bullet1 = new Bullet(sf::Vector2f{0.0f, 50.0f}, sf::Vector2i{0,0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/2.png");
+    bullets.push_back(bullet1);
+    
+    playerSprite = new Player(sf::Vector2f{0.0f, 0.0f}, sf::Vector2i{0,0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/1.png");
     
     textMessages.push_back(textMessage);
 }
@@ -104,7 +111,7 @@ void GameManager::update() {
 }
 
 void GameManager::draw() {
-    
+    window.clear();
     window.draw(playerSprite->returnSpritesShape());
     for (TextClass* text : textMessages) {
         if(text->visibleState())
