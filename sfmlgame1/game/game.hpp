@@ -22,28 +22,19 @@ private:
     void update();
     void draw();
 
-    const int screenWidth, screenHeight;
     sf::RenderWindow window;
-
-    float deltaTime;
-    float globalTime;
     sf::Clock clock;
     
-    sf::Vector2i mouseClickedPos;
-    
-    Sprite* playerSprite;
-    std::vector<Sprite*> enemySprite;
-    std::vector<Sprite*> bullets;
+    Player* playerSprite;
+    std::vector<Enemy*> enemySprite;
+    std::vector<Bullet*> bullets;
     std::vector<TextClass*> textMessages;
-    
-    flagEvents FlagEvents;
-    gameEvents GameEvents;
-    
+
 public:
     GameManager();
     ~GameManager();
     void runGame();
-    sf::Vector2i getScreenSize(){ return sf::Vector2i{screenWidth, screenHeight}; }
+    sf::Vector2i getScreenSize(){ return sf::Vector2i{0, 0}; }
 };
 
 #endif /* game_hpp */

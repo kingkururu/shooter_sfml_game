@@ -9,6 +9,7 @@
 #define global_hpp
 
 #include <stdio.h>
+#include <SFML/Graphics.hpp>
 
 extern struct flagEvents{
     bool wPressed;
@@ -25,6 +26,15 @@ extern struct gameEvents{
     
     gameEvents() : playerDead(false), enemyDead(false){}
 } GameEvents;
+
+extern struct gameComponents{
+    int screenWidth, screenHeight;
+    float deltaTime;
+    float globalTime;
+    sf::Vector2i mouseClickedPos;
+    
+    gameComponents() : screenWidth(1000), screenHeight(1000), deltaTime(0), globalTime(0), mouseClickedPos(0, 0) { }
+} GameComponents;
 
 
 

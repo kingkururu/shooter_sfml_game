@@ -6,17 +6,16 @@
 //
 
 #include "game.hpp"
-
-GameManager::GameManager() : screenWidth(800), screenHeight(450), deltaTime(0.0f), window(sf::VideoMode(screenWidth, screenHeight), "sfml game tut") {
+GameManager::GameManager() : window(sf::VideoMode(GameComponents.screenHeight, GameComponents.screenWidth), "sfml game tut") {
     window.setFramerateLimit(30);
 }
 
 GameManager::~GameManager() {
-    for (Sprite* enemy : enemySprite) {
+    for (Enemy* enemy : enemySprite) {
         delete enemy;
         enemy = nullptr;
     }
-    for (Sprite* bullet : bullets) {
+    for (Bullet* bullet : bullets) {
         delete bullet;
         bullet = nullptr;
     }
@@ -44,8 +43,7 @@ void GameManager::createAssets( ){
     //create assets here
     TextClass* textMessage = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", "hello world");
     
-    playerSprite = new Sprite(sf::Vector2f{0.0f, 0.0f}, sf::Vector2i{0,0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/texture1.png");
-    playerSprite->setScreenSize(getScreenSize());
+    playerSprite = new Player(sf::Vector2f{0.0f, 0.0f}, sf::Vector2i{0,0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/texture1.png");
     
     textMessages.push_back(textMessage);
 }
@@ -74,16 +72,22 @@ void GameManager::handleEvents(){
                     break;
             }
         }
+        if (event.type == sf::Event::KeyReleased){
+            FlagEvents.dPressed = false;
+            FlagEvents.aPressed = false;
+            FlagEvents.wPressed = false;
+            FlagEvents.sPressed = false;
+        }
         if (event.type == sf::Event::MouseButtonPressed){
-            mouseClickedPos = sf::Mouse::getPosition(window);
+            GameComponents.mouseClickedPos = sf::Mouse::getPosition(window);
         }
     }
 }
 
 void GameManager::countTime(){
     sf::Time frameTime = clock.restart();
-    deltaTime = frameTime.asSeconds();
-    globalTime += frameTime.asSeconds(); 
+    GameComponents.deltaTime = frameTime.asSeconds();
+    GameComponents.globalTime += frameTime.asSeconds();
 }
 
 void GameManager::update() {
@@ -96,7 +100,7 @@ void GameManager::update() {
             bullet->updatePos( );
     }
     if(playerSprite->getMoveState())
-        playerSprite->updatePos();
+        playerSprite->movePlayer();
 }
 
 void GameManager::draw() {

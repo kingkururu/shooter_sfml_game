@@ -18,11 +18,10 @@ class Sprite{
 public:
     Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath);
     virtual ~Sprite();
-    virtual void setScreenSize(sf::Vector2i screenSize);
-    virtual void updatePos();
+    void updatePos();
     virtual sf::Vector2f const getSpritePos(){ return position; };
-    virtual bool const getMoveState(){ return moveState; }
-    virtual bool const getVisibleState(){ return visibleState; }
+    virtual bool const getMoveState(){ return this->moveState; }
+    virtual bool const getVisibleState(){ return this->visibleState; }
     sf::Sprite const returnSpritesShape(){ return *spriteCreated; }
     
 protected:
@@ -32,8 +31,8 @@ protected:
     sf::Sprite* spriteCreated;
     bool moveState = true;
     bool visibleState = true;
-    sf::Vector2i screenSize;
-    float speed = 0.3;
+    
+    float speed = 20;
 };
 
 //player class
@@ -41,9 +40,6 @@ class Player : public Sprite{
 public:
     Player(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
     ~Player( ) override{ };
-    void updatePos() override;
-    
-private:
     void movePlayer();
 };
 
@@ -52,7 +48,6 @@ class Enemy : public Sprite{
 public:
     Enemy(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
     ~Enemy( ) override{ };
-    void updatePos() override;
     
 private:
     void moveEnemy();
@@ -63,7 +58,6 @@ class Bullet : public Sprite{
 public:
     Bullet(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
     ~Bullet( ) override{ };
-    void updatePos() override;
     
 private:
     void moveBullet();

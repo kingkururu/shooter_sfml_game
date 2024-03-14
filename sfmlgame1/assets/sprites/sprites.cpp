@@ -5,7 +5,6 @@
 //  Created by Sunmyoung Yun on 2024/01/07.
 //
 #include "sprites.hpp"
-flagEvents FlagEvents;
 
 //base class (sprite)
 Sprite::Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : position(position), size(size), skin(new sf::Texture), spriteCreated(new sf::Sprite){
@@ -24,18 +23,14 @@ Sprite::~Sprite(){
     delete spriteCreated;
 }
 
-void Sprite::setScreenSize(sf::Vector2i screenSize){
-    this-> screenSize = screenSize;
-}
-
 void Sprite::updatePos(){
-    if (position.x > screenSize.x) {
-        position.x = screenSize.x;
+    if (position.x > GameComponents.screenWidth) {
+        position.x = GameComponents.screenWidth;
     } else if (position.x < 0) {
         position.x = 0;
     }
-    if (position.y > screenSize.y) {
-        position.y = screenSize.y;
+    if (position.y > GameComponents.screenHeight) {
+        position.y = GameComponents.screenHeight;
     } else if (position.y < 0) {
         position.y = 0;
     }
@@ -44,25 +39,31 @@ void Sprite::updatePos(){
 
 //Player class
 void Player::movePlayer(){
-    
     if(FlagEvents.wPressed){
-//  
-   }
-//
-    spriteCreated->setPosition(position);
-    updatePos();
+        position.y -= speed * GameComponents.deltaTime;
+    }
+    if(FlagEvents.aPressed){
+        position.x -= speed * GameComponents.deltaTime;
+    }
+    if(FlagEvents.sPressed){
+        position.y += speed * GameComponents.deltaTime;
+    }
+    if(FlagEvents.dPressed){
+        position.x += speed * GameComponents.deltaTime;
+    }
+    this->updatePos();
 }
 
 //Enemy class
 void Enemy::moveEnemy(){
-    spriteCreated->setPosition(position);
-    updatePos( );
+    
+    //updatePos( );
 }
 
 //Bullet class
 void Bullet::moveBullet(){
-    spriteCreated->setPosition(position);
-    updatePos( );
+
+    //updatePos( );
 }
 
 

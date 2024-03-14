@@ -6,3 +6,7 @@
 //
 
 #include "global.hpp"
+
+gameComponents GameComponents;
+flagEvents FlagEvents;
+gameEvents GameEvents;
