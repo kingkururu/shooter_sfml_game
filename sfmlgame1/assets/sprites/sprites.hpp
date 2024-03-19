@@ -30,7 +30,7 @@ protected:
     sf::Texture* skin = nullptr;
     sf::Sprite* spriteCreated;
     bool visibleState = true;
-    float speed = 60;
+    float speed = 80;
 };
 
 //player class
@@ -49,7 +49,7 @@ public:
     void moveEnemy(sf::Vector2f playerPos);
     
 private:
-    float speed = 20;
+    float speed = 100;
 };
 
 //bullet class
@@ -62,7 +62,7 @@ public:
 private:
     void calculateDirVec();
     sf::Vector2f directionUnit;
-    float speed = 300;
+    float speed = 500;
 };
 
 

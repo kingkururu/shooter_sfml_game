@@ -28,5 +28,7 @@ sf::Text* TextClass::getText() {
 
 TextClass::~TextClass() {
     delete font;
+    font = nullptr;
     delete text;
+    text = nullptr;
 }

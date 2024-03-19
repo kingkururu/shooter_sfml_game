@@ -26,6 +26,9 @@ GameManager::~GameManager() {
     
     delete playerSprite;
     playerSprite = nullptr;
+    
+    delete background;
+    background = nullptr;
 }
 
 void GameManager::runGame() {
@@ -44,13 +47,18 @@ void GameManager::runGame() {
 void GameManager::createAssets( ){
    for (int i = 0; i< GameComponents.enemyNum; i++){
         Enemy* enemy = new Enemy( sf::Vector2f{
-            static_cast<float>(GameComponents.screenWidth - 400),
+            static_cast<float>(GameComponents.screenWidth - 900),
             static_cast<float>(rand() % GameComponents.screenHeight)
-        }, sf::Vector2f{0.6,0.6}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/3.png");
+        }, sf::Vector2f{0.3,0.3}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/3.png");
         enemySprite.push_back(enemy);
   }
-    
     playerSprite = new Player(sf::Vector2f{0.0f, 0.0f}, sf::Vector2f{0.2,0.2}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/1.png");
+    background = new Sprite(sf::Vector2f{0.0f, 0.0f}, sf::Vector2f{0.9,0.9}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/4.png");
+    
+    backgroundMusic = new MusicClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/backgroundMusic.ogg");
+    backgroundMusic->returnMusic()->play();
+    
+    bulletSound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/bulletSound.wav");
 }
 
 void GameManager::handleEventInput(){
@@ -97,6 +105,7 @@ void GameManager::handleGameEvents(){
     if(FlagEvents.mouseClicked){
         Bullet* bullet = new Bullet(playerSprite->getSpritePos(),sf::Vector2f{0.03,0.03}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/2.png");
             bullets.push_back(bullet);
+        bulletSound->returnSound()->play();
     }
     
     if(GameEvents.playerWin){
@@ -111,6 +120,7 @@ void GameManager::handleGameEvents(){
         TextClass* endMessage1 = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", endingText);
             endMessage.push_back(endMessage1);
         GameEvents.gameEnd = true;
+        backgroundMusic->returnMusic()->stop();
     }
 }
 
@@ -130,6 +140,7 @@ void GameManager::moveSprites() {
 
 void GameManager::draw() {
     window.clear();
+    window.draw(background->returnSpritesShape());
     window.draw(playerSprite->returnSpritesShape());
    
     for (TextClass* text : endMessage){

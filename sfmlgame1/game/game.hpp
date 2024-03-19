@@ -24,7 +24,6 @@ private:
     void createAssets();
     void handleEventInput();
     void handleGameEvents();
-    void freezeSprites();
     void countTime();
     void moveSprites();
     void draw();
@@ -32,11 +31,15 @@ private:
     sf::RenderWindow window;
     sf::Clock clock;
     
+    Sprite* background; 
     Player* playerSprite;
     std::vector<Enemy*> enemySprite;
     std::vector<Bullet*> bullets;
     std::vector<TextClass*> endMessage;
     std::string endingText;
+    
+    MusicClass* backgroundMusic;
+    SoundClass* bulletSound;
 };
 
 #endif /* game_hpp */
