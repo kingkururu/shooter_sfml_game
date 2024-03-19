@@ -20,18 +20,15 @@ public:
     virtual ~Sprite();
     void updatePos();
     sf::Vector2f const getSpritePos(){ return position; };
-    bool const getMoveState(){ return this->moveState; }
     bool const getVisibleState(){ return this->visibleState; }
     sf::Sprite const returnSpritesShape(){ return *spriteCreated; }
     void setVisibleState(bool VisibleState){ visibleState = VisibleState; }
-    void setMoveState(bool MoveState){ moveState = MoveState; }
     
 protected:
     sf::Vector2f position;
     sf::Vector2f size;
     sf::Texture* skin = nullptr;
     sf::Sprite* spriteCreated;
-    bool moveState = true;
     bool visibleState = true;
     float speed = 60;
 };

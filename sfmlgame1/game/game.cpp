@@ -107,22 +107,10 @@ void GameManager::handleGameEvents(){
     }
     
     if(GameEvents.playerWin || GameEvents.playerDead){
-        freezeSprites();
-
         endingText.append(std::to_string(GameComponents.globalTime));
         TextClass* endMessage1 = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", endingText);
             endMessage.push_back(endMessage1);
         GameEvents.gameEnd = true;
-    }
-}
-
-void GameManager::freezeSprites(){
-    playerSprite->setMoveState(false);
-    for (Enemy* enemy : enemySprite) {
-        enemy->setMoveState(false);
-    }
-    for (Bullet* bullet : bullets) {
-        bullet->setMoveState(false);
     }
 }
 
