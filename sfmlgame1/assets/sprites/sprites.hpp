@@ -23,6 +23,8 @@ public:
     bool const getMoveState(){ return this->moveState; }
     bool const getVisibleState(){ return this->visibleState; }
     sf::Sprite const returnSpritesShape(){ return *spriteCreated; }
+    void setVisibleState(bool VisibleState){ visibleState = VisibleState; }
+    void setMoveState(bool MoveState){ moveState = MoveState; }
     
 protected:
     sf::Vector2f position;

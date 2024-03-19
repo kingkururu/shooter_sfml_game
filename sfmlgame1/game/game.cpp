@@ -34,16 +34,22 @@ void GameManager::runGame() {
     while (window.isOpen()) {
         createMoreAssets();
         countTime();
-        handleEvents();
-        update();
+        handleEventInput();
+        handleGameEvents();
+        moveSprites();
         draw();
     }
 }
 
 void GameManager::createAssets( ){
     //create assets here
-    TextClass* textMessage = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", "hello world");
-    textMessages.push_back(textMessage);
+    TextClass* playerWin = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", "Player wins! time elapsed: ");
+    playerWin->setVisibleState(false);
+    textMessages.push_back(playerWin);
+    
+    TextClass* playerLose = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", "Player lose! time elapsed: ");
+    playerLose->setVisibleState(false);
+    textMessages.push_back(playerLose);
 
    for (int i = 0; i< GameComponents.enemyNum; i++){
         Enemy* enemy = new Enemy( sf::Vector2f{
@@ -58,12 +64,16 @@ void GameManager::createAssets( ){
 
 void GameManager::createMoreAssets( ){
     if(FlagEvents.mouseClicked){
-        Bullet* bullet1 = new Bullet(playerSprite->getSpritePos(),sf::Vector2f{0.03,0.03}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/2.png");
-        bullets.push_back(bullet1);
+        Bullet* bullet = new Bullet(playerSprite->getSpritePos(),sf::Vector2f{0.03,0.03}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/2.png");
+        bullets.push_back(bullet);
+    }if(GameEvents.playerWin || GameEvents.playerDead){
+        TextClass* timeElapsed = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", std::to_string(GameComponents.globalTime));
+        timeElapsed->setVisibleState(false);
+        textMessages.push_back(timeElapsed);
     }
 }
 
-void GameManager::handleEvents(){
+void GameManager::handleEventInput(){
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed){
@@ -103,13 +113,36 @@ void GameManager::handleEvents(){
     }
 }
 
+void GameManager::handleGameEvents(){
+    if(GameEvents.playerDead){
+        textMessages[1]->setVisibleState(true);
+        textMessages[2]->setVisibleState(true);
+        freezeSprites();
+    }
+    else if(GameEvents.playerWin){
+        textMessages[0]->setVisibleState(true);
+        textMessages[2]->setVisibleState(true);
+        freezeSprites();
+    }
+}
+
+void GameManager::freezeSprites(){
+    playerSprite->setMoveState(false);
+    for (Enemy* enemy : enemySprite) {
+        enemy->setMoveState(false);
+    }
+    for (Bullet* bullet : bullets) {
+        bullet->setMoveState(false);
+    }
+}
+
 void GameManager::countTime(){
     sf::Time frameTime = clock.restart();
     GameComponents.deltaTime = frameTime.asSeconds();
     GameComponents.globalTime += frameTime.asSeconds();
 }
 
-void GameManager::update() {
+void GameManager::moveSprites() {
     for (Enemy* enemy : enemySprite) {
         if(enemy->getMoveState())
             enemy->moveEnemy(playerSprite->getSpritePos());
@@ -126,7 +159,7 @@ void GameManager::draw() {
     window.clear();
     window.draw(playerSprite->returnSpritesShape());
     for (TextClass* text : textMessages) {
-        if(text->visibleState())
+        if(text->getVisibleState())
         window.draw(*text->getText());
     }
     for (Enemy* enemy : enemySprite) {

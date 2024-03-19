@@ -15,12 +15,19 @@
 #include "global.hpp"
 
 class GameManager {
+public:
+    GameManager();
+    ~GameManager();
+    void runGame();
+    
 private:
     void createAssets();
     void createMoreAssets();
-    void handleEvents();
-    void countTime(); 
-    void update();
+    void handleEventInput();
+    void handleGameEvents();
+    void freezeSprites();
+    void countTime();
+    void moveSprites();
     void draw();
 
     sf::RenderWindow window;
@@ -30,12 +37,6 @@ private:
     std::vector<Enemy*> enemySprite;
     std::vector<Bullet*> bullets;
     std::vector<TextClass*> textMessages;
-
-public:
-    GameManager();
-    ~GameManager();
-    void runGame();
-    sf::Vector2i getScreenSize(){ return sf::Vector2i{0, 0}; }
 };
 
 #endif /* game_hpp */

@@ -23,9 +23,9 @@ extern struct flagEvents{
 
 extern struct gameEvents{
     bool playerDead;
-    bool enemyDead;
+    bool playerWin;
     
-    gameEvents() : playerDead(false), enemyDead(false){}
+    gameEvents() : playerWin(false), playerDead(false) {}
 } GameEvents;
 
 extern struct gameComponents{

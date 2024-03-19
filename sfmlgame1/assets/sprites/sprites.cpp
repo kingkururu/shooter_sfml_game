@@ -74,7 +74,7 @@ void Bullet::moveBullet(){
     position += directionUnit * speed * GameComponents.deltaTime;
 
     if (position.x > GameComponents.screenWidth || position.x < 0 || position.y > GameComponents.screenHeight || position.y < 0) {
-        visibleState = false;
+        setVisibleState(false); 
     }
     spriteCreated->setPosition(position);
 }
