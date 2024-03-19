@@ -24,8 +24,9 @@ extern struct flagEvents{
 extern struct gameEvents{
     bool playerDead;
     bool playerWin;
+    bool gameEnd;
     
-    gameEvents() : playerWin(false), playerDead(false) {}
+    gameEvents() : playerWin(false), playerDead(false),gameEnd(false){}
 } GameEvents;
 
 extern struct gameComponents{
@@ -35,7 +36,7 @@ extern struct gameComponents{
     sf::Vector2i mouseClickedPos;
     const int enemyNum = 4;
     
-    gameComponents() : screenWidth(1000), screenHeight(1000), deltaTime(0), globalTime(0), mouseClickedPos(0,0) { }
+    gameComponents() : screenWidth(1000), screenHeight(1000), deltaTime(0), globalTime(0), mouseClickedPos(0,0){}
 } GameComponents;
 
 

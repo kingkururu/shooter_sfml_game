@@ -22,7 +22,6 @@ public:
     
 private:
     void createAssets();
-    void createMoreAssets();
     void handleEventInput();
     void handleGameEvents();
     void freezeSprites();
@@ -36,7 +35,8 @@ private:
     Player* playerSprite;
     std::vector<Enemy*> enemySprite;
     std::vector<Bullet*> bullets;
-    std::vector<TextClass*> textMessages;
+    std::vector<TextClass*> endMessage;
+    std::string endingText;
 };
 
 #endif /* game_hpp */
