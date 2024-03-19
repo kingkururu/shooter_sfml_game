@@ -17,6 +17,7 @@
 class GameManager {
 private:
     void createAssets();
+    void createMoreAssets();
     void handleEvents();
     void countTime(); 
     void update();

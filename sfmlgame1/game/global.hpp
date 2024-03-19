@@ -16,8 +16,9 @@ extern struct flagEvents{
     bool aPressed;
     bool sPressed;
     bool dPressed;
+    bool mouseClicked;
     
-    flagEvents() : wPressed(false), aPressed(false), sPressed(false), dPressed(false){}
+    flagEvents() : wPressed(false), aPressed(false), sPressed(false), dPressed(false), mouseClicked(false){}
 } FlagEvents;
 
 extern struct gameEvents{
@@ -34,7 +35,7 @@ extern struct gameComponents{
     sf::Vector2i mouseClickedPos;
     const int enemyNum = 4;
     
-    gameComponents() : screenWidth(1000), screenHeight(1000), deltaTime(0), globalTime(0), mouseClickedPos(0, 0) { }
+    gameComponents() : screenWidth(1000), screenHeight(1000), deltaTime(0), globalTime(0), mouseClickedPos(0,0) { }
 } GameComponents;
 
 

@@ -7,7 +7,7 @@
 #include "sprites.hpp"
 
 //base class (sprite)
-Sprite::Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : position(position), size(size), skin(new sf::Texture), spriteCreated(new sf::Sprite){
+Sprite::Sprite(sf::Vector2f position, sf::Vector2f size, const std::string& texturePath) : position(position), size(size), skin(new sf::Texture), spriteCreated(new sf::Sprite){
     
     if(!skin->loadFromFile(texturePath)){
         std::cerr << "Erorr in loading sprite texture from: " << texturePath << std::endl;
@@ -16,6 +16,7 @@ Sprite::Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& text
     
     spriteCreated->setTexture(*skin);
     spriteCreated->setPosition(position);
+    spriteCreated->setScale(size);
 }
 
 Sprite::~Sprite(){
@@ -55,15 +56,27 @@ void Player::movePlayer(){
 }
 
 //Enemy class
-void Enemy::moveEnemy(){
-    
-    //updatePos( );
+void Enemy::moveEnemy(sf::Vector2f playerPos){
+    sf::Vector2f enemyToPlayer = playerPos - position;
+    float length = sqrt(enemyToPlayer.x * enemyToPlayer.x + enemyToPlayer.y * enemyToPlayer.y);
+    enemyToPlayer /= length;
+    position += enemyToPlayer * this->speed * GameComponents.deltaTime;
+    updatePos( );
 }
 
 //Bullet class
-void Bullet::moveBullet(){
+void Bullet::calculateDirVec(){
+    sf::Vector2f direction = static_cast<sf::Vector2f>(GameComponents.mouseClickedPos) - position;
+    directionUnit = direction / std::sqrt(direction.x * direction.x + direction.y * direction.y);
+}
 
-    //updatePos( );
+void Bullet::moveBullet(){
+    position += directionUnit * speed * GameComponents.deltaTime;
+
+    if (position.x > GameComponents.screenWidth || position.x < 0 || position.y > GameComponents.screenHeight || position.y < 0) {
+        visibleState = false;
+    }
+    spriteCreated->setPosition(position);
 }
 
 

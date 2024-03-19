@@ -16,29 +16,28 @@
 
 class Sprite{
 public:
-    Sprite(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath);
+    Sprite(sf::Vector2f position, sf::Vector2f size, const std::string& texturePath);
     virtual ~Sprite();
     void updatePos();
-    virtual sf::Vector2f const getSpritePos(){ return position; };
-    virtual bool const getMoveState(){ return this->moveState; }
-    virtual bool const getVisibleState(){ return this->visibleState; }
+    sf::Vector2f const getSpritePos(){ return position; };
+    bool const getMoveState(){ return this->moveState; }
+    bool const getVisibleState(){ return this->visibleState; }
     sf::Sprite const returnSpritesShape(){ return *spriteCreated; }
     
 protected:
     sf::Vector2f position;
-    sf::Vector2i size;
+    sf::Vector2f size;
     sf::Texture* skin = nullptr;
     sf::Sprite* spriteCreated;
     bool moveState = true;
     bool visibleState = true;
-    
-    float speed = 40;
+    float speed = 60;
 };
 
 //player class
 class Player : public Sprite{
 public:
-    Player(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
+    Player(sf::Vector2f position, sf::Vector2f size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
     ~Player( ) override{ };
     void movePlayer();
 };
@@ -46,21 +45,25 @@ public:
 //enemy class
 class Enemy : public Sprite{
 public:
-    Enemy(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
+    Enemy(sf::Vector2f position, sf::Vector2f size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
     ~Enemy( ) override{ };
+    void moveEnemy(sf::Vector2f playerPos);
     
 private:
-    void moveEnemy();
+    float speed = 20;
 };
 
 //bullet class
 class Bullet : public Sprite{
 public:
-    Bullet(sf::Vector2f position, sf::Vector2i size, const std::string& texturePath) : Sprite(position, size, texturePath) {}
+    Bullet(sf::Vector2f position, sf::Vector2f size, const std::string& texturePath) : Sprite(position, size, texturePath) { calculateDirVec(); }
     ~Bullet( ) override{ };
+    void moveBullet();
     
 private:
-    void moveBullet();
+    void calculateDirVec();
+    sf::Vector2f directionUnit;
+    float speed = 300;
 };
 
 
