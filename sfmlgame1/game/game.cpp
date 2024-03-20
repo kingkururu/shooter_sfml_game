@@ -11,18 +11,25 @@ GameManager::GameManager() : window(sf::VideoMode(GameComponents.screenHeight, G
 }
 
 GameManager::~GameManager() {
+    destroyAll();
+}
+
+void GameManager::destroyAll(){
     for (Enemy* enemy : enemySprite) {
         delete enemy;
         enemy = nullptr;
     }
+    enemySprite.clear();
     for (Bullet* bullet : bullets) {
         delete bullet;
         bullet = nullptr;
     }
+    bullets.clear();
     for (TextClass* text : endMessage){
         delete text;
         text = nullptr;
     }
+    endMessage.clear();
     delete playerSprite;
     playerSprite = nullptr;
     delete background;
@@ -45,7 +52,7 @@ void GameManager::runGame() {
     while (window.isOpen()) {
         if(!GameEvents.gameEnd){
             countTime();
-            checkCollision();
+            checkEvent();
             handleGameEvents();
             deleteAssets();
         }
@@ -95,11 +102,15 @@ void GameManager::handleEventInput(){
                 case sf::Keyboard::S:
                     FlagEvents.sPressed = true;
                     break;
+                case sf::Keyboard::B:
+                    destroyAll();
+                    restartGame();
+                    break;
                 default:
                     break;
             }
         }
-        if (event.type == sf::Event::KeyReleased){
+        else if (event.type == sf::Event::KeyReleased){
             FlagEvents.dPressed = false;
             FlagEvents.aPressed = false;
             FlagEvents.wPressed = false;
@@ -115,7 +126,7 @@ void GameManager::handleEventInput(){
     }
 }
 
-void GameManager::checkCollision(){
+void GameManager::checkEvent(){
     for (const auto& enemy : enemySprite) {
            sf::FloatRect enemyBounds = enemy->returnSpritesShape().getGlobalBounds();
            if(playerSprite->returnSpritesShape().getGlobalBounds().intersects(enemyBounds)) {
@@ -135,13 +146,13 @@ void GameManager::checkCollision(){
                 }
             }
     }
+    
+    if(!enemySprite.size())
+        GameEvents.playerWin = true;
 }
 
 void GameManager::handleGameEvents(){
-    if(!enemySprite.size())
-        GameEvents.playerWin = true;
-    
-    if(FlagEvents.mouseClicked){
+   if(FlagEvents.mouseClicked){
         Bullet* bullet = new Bullet(playerSprite->getSpritePos(),sf::Vector2f{0.03,0.03}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/2.png");
             bullets.push_back(bullet);
         bulletSound->returnSound()->play();
@@ -233,4 +244,18 @@ void GameManager::deleteAssets() {
             it = bullets.erase(it);
         }
     }
+}
+
+void GameManager::restartGame(){
+    window.clear();
+    std::cout << "new game" << std::endl;
+    createAssets();
+    
+    GameEvents.gameEnd = false;
+    GameEvents.playerWin = false;
+    GameEvents.playerDead = false;
+    
+    GameComponents.globalTime = 0.0f;
+    endMessage.clear();
+    endingText = "";
 }

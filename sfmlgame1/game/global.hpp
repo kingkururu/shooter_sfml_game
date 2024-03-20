@@ -34,7 +34,7 @@ extern struct gameComponents{
     float deltaTime;
     float globalTime;
     sf::Vector2i mouseClickedPos;
-    const int enemyNum = 4;
+    const int enemyNum = 7;
     
     gameComponents() : screenWidth(1920), screenHeight(1080), deltaTime(0), globalTime(0), mouseClickedPos(0,0){}
 } GameComponents;

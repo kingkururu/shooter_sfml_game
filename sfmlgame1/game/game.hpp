@@ -24,11 +24,13 @@ private:
     void createAssets();
     void handleEventInput();
     void handleGameEvents();
-    void checkCollision();
+    void checkEvent();
     void countTime();
     void updateSprites();
     void draw();
-    void deleteAssets(); 
+    void deleteAssets();
+    void restartGame();
+    void destroyAll();
 
     sf::RenderWindow window;
     sf::Clock clock;

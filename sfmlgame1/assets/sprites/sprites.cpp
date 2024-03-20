@@ -61,7 +61,7 @@ void Player::updatePlayer(){
         for (int i = 0; i < 3; i ++){
             color[i] = rand() % 255;
         }
-        spriteCreated->setColor(sf::Color(color[0],color[1],color[3]));
+        spriteCreated->setColor(sf::Color(color[0],color[1],color[2]));
         
     } else if(GameEvents.playerDead){
         spriteCreated->setColor(sf::Color(200, 0, 0));
