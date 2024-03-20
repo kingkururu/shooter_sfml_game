@@ -22,10 +22,6 @@ TextClass::TextClass(sf::Vector2f position, unsigned int size, sf::Color color, 
     text->setString(testMessage);
 }
 
-sf::Text* TextClass::getText() {
-    return text;
-}
-
 TextClass::~TextClass() {
     delete font;
     font = nullptr;

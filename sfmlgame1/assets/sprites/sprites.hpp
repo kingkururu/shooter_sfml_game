@@ -19,8 +19,8 @@ public:
     Sprite(sf::Vector2f position, sf::Vector2f size, const std::string& texturePath);
     virtual ~Sprite();
     void updatePos();
-    sf::Vector2f const getSpritePos(){ return position; };
-    bool const getVisibleState(){ return this->visibleState; }
+    sf::Vector2f const getSpritePos() const { return position; };
+    bool const getVisibleState() const { return this->visibleState; }
     sf::Sprite const returnSpritesShape(){ return *spriteCreated; }
     void setVisibleState(bool VisibleState){ visibleState = VisibleState; }
     

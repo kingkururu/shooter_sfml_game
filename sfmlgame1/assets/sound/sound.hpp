@@ -15,7 +15,7 @@
 class MusicClass{
 public:
     MusicClass(const std::string& musicPath);
-    sf::Music* const returnMusic(){ return music; }
+    sf::Music* const returnMusic() const { return music; }
     ~MusicClass(){ delete music; music = nullptr; }
     
 private:
@@ -25,7 +25,7 @@ private:
 class SoundClass{
 public:
     SoundClass(const std::string& musicPath);
-    sf::Sound* const returnSound(){ return sound; }
+    sf::Sound* const returnSound() const { return sound; }
     ~SoundClass(){ delete sound; sound = nullptr; delete soundBuffer; soundBuffer = nullptr; }
 
 private:

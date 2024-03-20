@@ -16,9 +16,9 @@
 class TextClass{
 public:
     TextClass(sf::Vector2f position, unsigned int size, sf::Color color, const std::string& fontPath, const std::string& testMessage);
-    sf::Text* getText();
+    sf::Text* const getText() const { return text; }
     ~TextClass();
-    const bool getVisibleState(){ return visibleState; }
+    bool const getVisibleState() const { return visibleState; }
     void setVisibleState(bool VisibleState){ visibleState = VisibleState; }
 
 private:

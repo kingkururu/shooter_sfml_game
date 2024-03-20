@@ -124,15 +124,17 @@ void GameManager::checkCollision(){
                 if (bulletBounds.intersects(enemyBounds)) {
                     (*bulletIter)->setVisibleState(false);
                     enemy->setVisibleState(false);
+                    enemyDeadSound->returnSound()->play();
                     break;
                 }
             }
     }
-    if(!enemySprite.size())
-        GameEvents.playerWin = true;
 }
 
 void GameManager::handleGameEvents(){
+    if(!enemySprite.size())
+        GameEvents.playerWin = true;
+    
     if(FlagEvents.mouseClicked){
         Bullet* bullet = new Bullet(playerSprite->getSpritePos(),sf::Vector2f{0.03,0.03}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/2.png");
             bullets.push_back(bullet);
@@ -144,6 +146,7 @@ void GameManager::handleGameEvents(){
     }
     else if(GameEvents.playerDead){
         endingText = "player lose! time elapsed: ";
+        playerDeadSound->returnSound()->play();
     }
     
     if(GameEvents.playerWin || GameEvents.playerDead){

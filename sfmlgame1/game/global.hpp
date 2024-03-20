@@ -26,7 +26,7 @@ extern struct gameEvents{
     bool playerWin;
     bool gameEnd;
     
-    gameEvents() : playerWin(false), playerDead(false),gameEnd(false){}
+    gameEvents() : playerWin(false), playerDead(false), gameEnd(false){}
 } GameEvents;
 
 extern struct gameComponents{
