@@ -36,6 +36,8 @@ GameManager::~GameManager() {
     enemyDeadSound = nullptr;
     delete playerDeadSound;
     playerDeadSound = nullptr;
+    delete victorySound;
+    victorySound = nullptr;
 }
 
 void GameManager::runGame() {
@@ -45,14 +47,17 @@ void GameManager::runGame() {
             countTime();
             checkCollision();
             handleGameEvents();
-            moveSprites();
+            deleteAssets();
         }
+        updateSprites();
         handleEventInput();
         draw();
     }
 }
 
 void GameManager::createAssets( ){
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
    for (int i = 0; i< GameComponents.enemyNum; i++){
         Enemy* enemy = new Enemy( sf::Vector2f{
             static_cast<float>(GameComponents.screenWidth - 900),
@@ -67,6 +72,7 @@ void GameManager::createAssets( ){
     bulletSound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/bulletSound.wav");
     enemyDeadSound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/enemyDead.wav");
     playerDeadSound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/playerDead.wav");
+    victorySound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/victorySound.wav");
 }
 
 void GameManager::handleEventInput(){
@@ -142,19 +148,27 @@ void GameManager::handleGameEvents(){
     }
     
     if(GameEvents.playerWin){
-        endingText = "player wins! time elapsed: ";
+        endingText = "player wins! time elapsed:\n";
+        victorySound->returnSound()->play();
+        GameEvents.gameEnd = true;
     }
     else if(GameEvents.playerDead){
-        endingText = "player lose! time elapsed: ";
+        endingText = "player lose! time elapsed:\n";
         playerDeadSound->returnSound()->play();
+        GameEvents.gameEnd = true;
     }
     
-    if(GameEvents.playerWin || GameEvents.playerDead){
+    if(GameEvents.gameEnd){
         endingText.append(std::to_string(GameComponents.globalTime));
+        endingText.append(" seconds");
         TextClass* endMessage1 = new TextClass(sf::Vector2f{0.0f, 0.0f}, 20, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", endingText);
             endMessage.push_back(endMessage1);
-        GameEvents.gameEnd = true;
+        
         backgroundMusic->returnMusic()->stop();
+        
+        for(const auto& enemy : enemySprite){
+            enemy->setMoveState(false);
+        }
     }
 }
 
@@ -164,12 +178,17 @@ void GameManager::countTime(){
     GameComponents.globalTime += frameTime.asSeconds();
 }
 
-void GameManager::moveSprites() {
-    for (Enemy* enemy : enemySprite)
-        enemy->moveEnemy(playerSprite->getSpritePos());
-    for (Bullet* bullet : bullets)
-        bullet->moveBullet();
-    playerSprite->movePlayer();
+void GameManager::updateSprites() {
+    for (Enemy* enemy : enemySprite){
+        if(enemy->getMoveState())
+            enemy->updateEnemy(playerSprite->getSpritePos());
+    }
+    for (Bullet* bullet : bullets){
+        if(bullet->getMoveState())
+            bullet->updateBullet();
+    }
+    if(playerSprite->getMoveState())
+        playerSprite->updatePlayer();
 }
 
 void GameManager::draw() {
@@ -181,10 +200,21 @@ void GameManager::draw() {
         if(text->getVisibleState())
             window.draw(*text->getText());
     }
+    for (Enemy* enemy : enemySprite){
+        if(enemy->getVisibleState())
+            window.draw(enemy->returnSpritesShape());
+    }
+    for (Bullet* bullet : bullets){
+        if(bullet->getVisibleState())
+            window.draw(bullet->returnSpritesShape());
+    }
+    window.display();
+}
+
+void GameManager::deleteAssets() {
     for (auto it = enemySprite.begin(); it != enemySprite.end();) {
         Enemy* enemy = *it;
         if(enemy->getVisibleState()) {
-            window.draw(enemy->returnSpritesShape());
             ++it;
         } else {
             delete enemy;
@@ -195,7 +225,6 @@ void GameManager::draw() {
     for (auto it = bullets.begin(); it != bullets.end();) {
         Bullet* bullet = *it;
         if(bullet->getVisibleState()) {
-            window.draw(bullet->returnSpritesShape());
             ++it;
         } else {
             delete bullet;
@@ -203,5 +232,4 @@ void GameManager::draw() {
             it = bullets.erase(it);
         }
     }
-    window.display();
 }

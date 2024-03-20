@@ -26,8 +26,9 @@ private:
     void handleGameEvents();
     void checkCollision();
     void countTime();
-    void moveSprites();
+    void updateSprites();
     void draw();
+    void deleteAssets(); 
 
     sf::RenderWindow window;
     sf::Clock clock;
@@ -43,6 +44,7 @@ private:
     SoundClass* bulletSound;
     SoundClass* enemyDeadSound;
     SoundClass* playerDeadSound;
+    SoundClass* victorySound;
 };
 
 #endif /* game_hpp */

@@ -15,7 +15,7 @@ MusicClass::MusicClass(const std::string& musicPath) : music(new sf::Music){
 
 SoundClass::SoundClass(const std::string& musicPath) : soundBuffer(new sf::SoundBuffer), sound(new sf::Sound){
     if(!soundBuffer->loadFromFile(musicPath)){
-        std::cerr << "Error loading music from file: " << musicPath << std::endl;
+        std::cerr << "Error loading sound from file: " << musicPath << std::endl;
         return;
     }
     sound->setBuffer(*soundBuffer);

@@ -25,13 +25,13 @@ Sprite::~Sprite(){
 }
 
 void Sprite::updatePos(){
-    if (position.x > GameComponents.screenWidth) {
-        position.x = GameComponents.screenWidth;
-    } else if (position.x < 0) {
-        position.x = 0;
+    if (position.x > GameComponents.screenWidth - 930) {
+        position.x = GameComponents.screenWidth - 930;
+    } else if (position.x < - 10) {
+        position.x = - 10;
     }
-    if (position.y > GameComponents.screenHeight) {
-        position.y = GameComponents.screenHeight;
+    if (position.y > GameComponents.screenHeight - 430) {
+        position.y = GameComponents.screenHeight - 430;
     } else if (position.y < 0) {
         position.y = 0;
     }
@@ -39,7 +39,7 @@ void Sprite::updatePos(){
 }
 
 //Player class
-void Player::movePlayer(){
+void Player::updatePlayer(){
     if(FlagEvents.wPressed){
         position.y -= speed * GameComponents.deltaTime;
     }
@@ -52,11 +52,25 @@ void Player::movePlayer(){
     if(FlagEvents.dPressed){
         position.x += speed * GameComponents.deltaTime;
     }
+    
+    if(GameEvents.playerWin){
+        spriteCreated->setScale(sf::Vector2f{1.0f, 1.0f});
+        spriteCreated->rotate(1.0f);
+        
+        unsigned int color[3];
+        for (int i = 0; i < 3; i ++){
+            color[i] = rand() % 255;
+        }
+        
+        spriteCreated->setColor(sf::Color(color[0],color[1],color[3]));
+    } else if(GameEvents.playerDead){
+        spriteCreated->setColor(sf::Color(200, 0, 0));
+    }
     updatePos();
 }
 
 //Enemy class
-void Enemy::moveEnemy(sf::Vector2f playerPos){
+void Enemy::updateEnemy(sf::Vector2f playerPos){
     sf::Vector2f enemyToPlayer = playerPos - position;
     float length = sqrt(enemyToPlayer.x * enemyToPlayer.x + enemyToPlayer.y * enemyToPlayer.y);
     enemyToPlayer /= length;
@@ -70,7 +84,7 @@ void Bullet::calculateDirVec(){
     directionUnit = direction / std::sqrt(direction.x * direction.x + direction.y * direction.y);
 }
 
-void Bullet::moveBullet(){
+void Bullet::updateBullet(){
     position += directionUnit * speed * GameComponents.deltaTime;
 
     if (position.x > GameComponents.screenWidth || position.x < 0 || position.y > GameComponents.screenHeight || position.y < 0) {
