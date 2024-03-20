@@ -24,6 +24,7 @@ private:
     void createAssets();
     void handleEventInput();
     void handleGameEvents();
+    void checkCollision();
     void countTime();
     void moveSprites();
     void draw();
@@ -40,6 +41,8 @@ private:
     
     MusicClass* backgroundMusic;
     SoundClass* bulletSound;
+    SoundClass* enemyDeadSound;
+    SoundClass* playerDeadSound;
 };
 
 #endif /* game_hpp */

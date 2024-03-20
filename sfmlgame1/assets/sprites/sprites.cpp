@@ -52,7 +52,7 @@ void Player::movePlayer(){
     if(FlagEvents.dPressed){
         position.x += speed * GameComponents.deltaTime;
     }
-    this->updatePos();
+    updatePos();
 }
 
 //Enemy class
@@ -60,8 +60,8 @@ void Enemy::moveEnemy(sf::Vector2f playerPos){
     sf::Vector2f enemyToPlayer = playerPos - position;
     float length = sqrt(enemyToPlayer.x * enemyToPlayer.x + enemyToPlayer.y * enemyToPlayer.y);
     enemyToPlayer /= length;
-    position += enemyToPlayer * this->speed * GameComponents.deltaTime;
-    updatePos( );
+    position += enemyToPlayer * speed * GameComponents.deltaTime;
+    updatePos();
 }
 
 //Bullet class

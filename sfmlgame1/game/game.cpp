@@ -23,12 +23,19 @@ GameManager::~GameManager() {
         delete text;
         text = nullptr;
     }
-    
     delete playerSprite;
     playerSprite = nullptr;
-    
     delete background;
     background = nullptr;
+    
+    delete backgroundMusic;
+    backgroundMusic = nullptr;
+    delete bulletSound;
+    bulletSound = nullptr;
+    delete enemyDeadSound;
+    enemyDeadSound = nullptr;
+    delete playerDeadSound;
+    playerDeadSound = nullptr;
 }
 
 void GameManager::runGame() {
@@ -36,6 +43,7 @@ void GameManager::runGame() {
     while (window.isOpen()) {
         if(!GameEvents.gameEnd){
             countTime();
+            checkCollision();
             handleGameEvents();
             moveSprites();
         }
@@ -49,16 +57,16 @@ void GameManager::createAssets( ){
         Enemy* enemy = new Enemy( sf::Vector2f{
             static_cast<float>(GameComponents.screenWidth - 900),
             static_cast<float>(rand() % GameComponents.screenHeight)
-        }, sf::Vector2f{0.3,0.3}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/3.png");
+        }, sf::Vector2f{0.2,0.2}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/3.png");
         enemySprite.push_back(enemy);
-  }
-    playerSprite = new Player(sf::Vector2f{0.0f, 0.0f}, sf::Vector2f{0.2,0.2}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/1.png");
-    background = new Sprite(sf::Vector2f{0.0f, 0.0f}, sf::Vector2f{0.9,0.9}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/4.png");
-    
+   }
+    playerSprite = new Player(sf::Vector2f{0.0f, 50.0f}, sf::Vector2f{0.2,0.2}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/1.png");
+    background = new Sprite(sf::Vector2f{0.0f, 0.0f}, sf::Vector2f{1.0,1.0}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/4.png");
     backgroundMusic = new MusicClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/backgroundMusic.ogg");
     backgroundMusic->returnMusic()->play();
-    
     bulletSound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/bulletSound.wav");
+    enemyDeadSound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/enemyDead.wav");
+    playerDeadSound = new SoundClass("/Users/student/projects/sfmlgame1/sfmlgame1/assets/sound/playerDead.wav");
 }
 
 void GameManager::handleEventInput(){
@@ -101,6 +109,29 @@ void GameManager::handleEventInput(){
     }
 }
 
+void GameManager::checkCollision(){
+    for (const auto& enemy : enemySprite) {
+           sf::FloatRect enemyBounds = enemy->returnSpritesShape().getGlobalBounds();
+           if(playerSprite->returnSpritesShape().getGlobalBounds().intersects(enemyBounds)) {
+               GameEvents.playerDead = true;
+           }
+       }
+    for (auto bulletIter = bullets.begin(); bulletIter != bullets.end(); ++bulletIter) {
+            for (auto enemy : enemySprite) {
+                sf::FloatRect bulletBounds = (*bulletIter)->returnSpritesShape().getGlobalBounds();
+                sf::FloatRect enemyBounds = enemy->returnSpritesShape().getGlobalBounds();
+
+                if (bulletBounds.intersects(enemyBounds)) {
+                    (*bulletIter)->setVisibleState(false);
+                    enemy->setVisibleState(false);
+                    break;
+                }
+            }
+    }
+    if(!enemySprite.size())
+        GameEvents.playerWin = true;
+}
+
 void GameManager::handleGameEvents(){
     if(FlagEvents.mouseClicked){
         Bullet* bullet = new Bullet(playerSprite->getSpritePos(),sf::Vector2f{0.03,0.03}, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/sprites/2.png");
@@ -117,7 +148,7 @@ void GameManager::handleGameEvents(){
     
     if(GameEvents.playerWin || GameEvents.playerDead){
         endingText.append(std::to_string(GameComponents.globalTime));
-        TextClass* endMessage1 = new TextClass(sf::Vector2f{0.0f, 0.0f}, 100, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", endingText);
+        TextClass* endMessage1 = new TextClass(sf::Vector2f{0.0f, 0.0f}, 20, sf::Color::White, "/Users/student/projects/sfmlgame1/sfmlgame1/assets/fonts/arial.ttf", endingText);
             endMessage.push_back(endMessage1);
         GameEvents.gameEnd = true;
         backgroundMusic->returnMusic()->stop();
@@ -147,9 +178,16 @@ void GameManager::draw() {
         if(text->getVisibleState())
             window.draw(*text->getText());
     }
-    for (Enemy* enemy : enemySprite) {
-        if(enemy->getVisibleState())
-        window.draw(enemy->returnSpritesShape());
+    for (auto it = enemySprite.begin(); it != enemySprite.end();) {
+        Enemy* enemy = *it;
+        if(enemy->getVisibleState()) {
+            window.draw(enemy->returnSpritesShape());
+            ++it;
+        } else {
+            delete enemy;
+            enemy = nullptr;
+            it = enemySprite.erase(it);
+        }
     }
     for (auto it = bullets.begin(); it != bullets.end();) {
         Bullet* bullet = *it;
@@ -158,6 +196,7 @@ void GameManager::draw() {
             ++it;
         } else {
             delete bullet;
+            bullet = nullptr;
             it = bullets.erase(it);
         }
     }
