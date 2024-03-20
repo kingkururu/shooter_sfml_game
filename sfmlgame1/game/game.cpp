@@ -194,8 +194,7 @@ void GameManager::updateSprites() {
 void GameManager::draw() {
     window.clear();
     window.draw(background->returnSpritesShape());
-    window.draw(playerSprite->returnSpritesShape());
-   
+    
     for (TextClass* text : endMessage){
         if(text->getVisibleState())
             window.draw(*text->getText());
@@ -208,6 +207,8 @@ void GameManager::draw() {
         if(bullet->getVisibleState())
             window.draw(bullet->returnSpritesShape());
     }
+    window.draw(playerSprite->returnSpritesShape());
+    
     window.display();
 }
 
