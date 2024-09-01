@@ -2,6 +2,7 @@ This is my first mini game written in C++ and SFML.
 This is configured in Xcode only, and can be played with keyboard inputs like WASD keys and clicking on screen.
 
 ---------------------------------------------------------------------------------- HOW TO PLAY
+
 In order to win, shoot every GM (robot-like-sprites) before they touch the player (you) by clicking on the screen to launch bullets.
 You can move through space using WASD keys.
 
