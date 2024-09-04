@@ -23,11 +23,6 @@ bool Sprites<T_shape, T_size>::outOfScreen(){
 template <typename T_shape, typename T_size>
 void Sprites<T_shape, T_size>::setMoveState(bool moveState){
     this-> moveState = moveState;
-//    if(moveState)
-//    std::cout << "bullet not touch";
-//    else {
-//        std::cout << "bullet touched";
-//    }
 }
 
 template <typename T_shape, typename T_size>
@@ -74,18 +69,6 @@ template <typename T_shape, typename T_size>
 bool Sprites<T_shape, T_size>::isTouching(sf::Vector2f targetSpritePos) {
     const float epsilon = 0.5f; // Adjust this value based on your specific needs
     return (std::abs(targetSpritePos.x - this->position.x) < epsilon) || (std::abs(targetSpritePos.y - this->position.y) < epsilon);
-  
-//    //fix here !!
-//
-//    if (typeid(size) == typeid(float)){
-//
-//    } else if (typeid(size) == typeid(sf::Vector2f)){
-//
-//    }
-//
-//    // fix here!!
-    
-    
 }
 
 //player class functions
